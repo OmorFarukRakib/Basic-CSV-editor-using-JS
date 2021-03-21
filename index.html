@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="myStyle.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+  <title>CSV Editor with HTML, CSS & JavaScript</title>
+
+</head>
+
+<body>
+
+  <div class="center" style="margin-top: 20px;">
+    <label class="form-label" for="customFile">Import a CSV file</label>
+    <input type="file" class="form-control" id="csvFileInput" style="padding-bottom: 39px" />
+  </div>
+
+  <div class="center csv-export-btn-div">
+    <p class="font-weight-light">* Double click in the data field to edit data</p>
+    <button type="button" name="convert" id="csv-export-btn" class="btn btn-primary" this.disabled="true;">
+      Download
+    </button>
+    <div class="center container">
+      <table id="csvRoot" class="tableCSV"></table>
+      <button id="insert" class="btn btn-primary" style="margin-top: 10px;">Insert a new row</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- Here are the CDNs needed -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.2.0/papaparse.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+    integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/js/tableexport.min.js"
+    integrity="sha512-XmZS54be9JGMZjf+zk61JZaLZyjTRgs41JLSmx5QlIP5F+sSGIyzD2eJyxD4K6kGGr7AsVhaitzZ2WTfzpsQzg=="
+    crossorigin="anonymous"></script>
+
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+
+  <!-- Here are the custom JS file  -->
+  <script type="module" src="./js/CSVDataInsertToTable.js"></script>
+  <script src="./js/downloadCSVFromTable.js"></script>
+  <script src="./js/dataEdit.js"></script>
+  <script src="./js/rowDelete.js"></script>
+  <script src="./js/rowInsert.js"></script>
+</body>
+
+</html>
