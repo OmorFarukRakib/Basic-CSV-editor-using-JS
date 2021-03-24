@@ -25,9 +25,8 @@ tr:nth-child(even) {
 
 .center {
   margin: auto;
-  width: 60%;
+  width: 80%;
   padding: 10px;
-  
 }
 
 #custom-btn {
@@ -84,4 +83,14 @@ tr:nth-child(even) {
 
 .csv-export-btn-div {
   display: none;
+}
+
+/* For Dummy Table  */
+#dummy {
+  display: none;
+}
+
+/* Datatable pagination  */
+.pagination {
+  padding-left: 19rem;
 }
