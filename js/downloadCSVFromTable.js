@@ -48,3 +48,14 @@ $("#csvFileInput").on("input", function () {
 });
 
 
+// var csvFilename = $('input[type=file]')[0].files.length ? ('input[type=file]')[0].files[0].name : "";
+// console.log(csvFilename);
+// if(csvFilename){
+//   $('.csvName').text(csvFilename);
+// }
+
+function fileSelect( e){
+  console.log(e.target.files[0].name);
+  let csvFilename = e.target.files[0].name;
+  $('#csvName').html('' + csvFilename + '&nbsp;&nbsp;');
+}
