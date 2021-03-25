@@ -24,5 +24,4 @@ $("#tableContainer").on("click", "#insert", function () {
   
   // $("#csvRoot").DataTable().data.reload().draw();
 
-
 });
