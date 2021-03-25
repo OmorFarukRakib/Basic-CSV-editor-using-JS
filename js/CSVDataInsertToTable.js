@@ -39,7 +39,7 @@ class TableCsv {
                       ${headerColumns
                         .map(
                           (text) =>
-                            `<th onclick="listenForDoubleClick(this);" onblur="this.contentEditable=false;">${text}</th>`
+                            `<th>${text}</th>`
                         )
                         .join("")}
                         <th>Action</th>
@@ -62,11 +62,21 @@ class TableCsv {
                   ${row
                       .map(
                         (text) => `
-                              <td class="table-data" onclick="listenForDoubleClick(this);" onblur="this.contentEditable=false;">${text}</td>                                    
+                              <td class="table-data" contenteditable="false" >${text}</td>                                    
                               `
                         )
                         .join("")}
-                        <td> <button class="deleteRow btn btn-danger"> DELETE </button> </td>                   
+                        <td >
+                          <div class="actionOptions">
+                            
+                              <button class="editbtn btn btn-primary" >Edit</button>
+                            
+                             
+                              <button class="deleteRow btn btn-danger">Delete</button>
+                           
+                          </div>
+                        </td>                   
+                                       
                         </tr>              
               `;
     });
@@ -81,6 +91,8 @@ class TableCsv {
     );
   }
 }
+
+//onclick="listenForDoubleClick(this);" onblur="this.contentEditable=false;"
 
 const tableRoot = document.querySelector("#csvRoot");
 const csvFileInput = document.querySelector("#csvFileInput");
