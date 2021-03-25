@@ -17,5 +17,3 @@ $("#csvRoot").on("click", ".deleteRow", function () {
     return false;
   }
 });
-
-
