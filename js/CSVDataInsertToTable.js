@@ -99,29 +99,57 @@ const csvFileInput = document.querySelector("#csvFileInput");
 const tableCsv = new TableCsv(tableRoot);
 
 csvFileInput.addEventListener("change", (e) => {
-  Papa.parse(csvFileInput.files[0], {
-    delimiter: ",",
-    skipEmptyLines: true,
-    complete: (results) => {
-      tableCsv.update(results.data.slice(1), results.data[0]);
-      $(document).ready(function () {
-          $("#csvRoot").DataTable().destroy();
-          let table = $("#csvRoot").DataTable({
-            scrollY: 400,
-            scrollX: true,
-            scrollCollapse: true,
-          });  
-     
-       
-
-       
+  $("#csvRoot").html('');
+  $(".dataTables_scrollHead").html('');
+  
 
 
+  // For excel
+  // get the file name, possibly with path (depends on browser)
+        var filename = $("#csvFileInput").val();
 
+        // Use a regular expression to trim everything before final dot
+        var extension = filename.replace(/^.*\./, '');
+        console.log(extension);
+        if (extension == filename) {
+          extension = '';
+      } else {
+          // if there is an extension, we convert to lower case
+          // (N.B. this conversion will not effect the value of the extension
+          // on the file upload.)
+          extension = extension.toLowerCase();
+      }
 
-       });
-    },
-  });
+      if(extension === 'csv') {
+        
+          Papa.parse(csvFileInput.files[0], {
+            delimiter: ",",
+            skipEmptyLines: true,
+            complete: (results) => {
+              console.log(results.data);
+              tableCsv.update(results.data.slice(1), results.data[0]);
+              $(document).ready(function () {
+                  $("#csvRoot").DataTable().destroy();
+                  $("#csvRoot").DataTable({
+                    destroy: true,
+                    scrollY: 400,
+                    scrollX: true,
+                    scrollCollapse: true,
+                  });  
+               });
+            },
+          });
+        }
+        else if(extension === 'xlsx' || extension === 'xls'){
+          ExportToTable();
+        }else{
+           alert("WRONG FILE");
+           $(".csv-export-btn-div").hide();
+        }
+        
+
+  //for csv 
+  
 });
 
 
