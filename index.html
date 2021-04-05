@@ -1,85 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <link rel="stylesheet" href="./libs/bootstrap.min.css" />
-    <link rel="stylesheet" href="./libs/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="myStyle.css" />
-    <title>CSV Editor with HTML, CSS & JavaScript</title>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="./libs/bootstrap.min.css" />
+  <link rel="stylesheet" href="./libs/dataTables.bootstrap4.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="myStyle.css" />
+  <title>CSV Editor with HTML, CSS & JavaScript</title>
+</head>
+
+<body>
 
 
-<!-- Button trigger modal -->
-<br>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl" style="margin-left: 45%;">Start Tracking With CSV</button>
+  <!-- Button trigger modal -->
+  <br>
+  <button type="button" id="startTrackingByFileButton" class="btn btn-primary" data-toggle="modal"
+    data-target=".bd-example-modal-xl" style="margin-left: 45%;">Start Tracking With CSV/Xlsx</button>
 
-<div class="modal fade bd-example-modal-xl modelBoxContent" style=" width: 100%; background-color: white;" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-xl modelBoxContent" style=" width: 100%; background-color: white;"
+    tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 
-  <div style="width: 50%; height: 100%; background-color: aliceblue; margin-left: 25%;">
-<div class="navBarOfTable ">
-  <div class="headerWithCsvName">
-    
-    <h4>&nbsp;&nbsp;CSV/Excelで機器情報アップロード機能</h4>
-    <h4 id='csvName'></h4>
-  </div>
-  <hr>
+    <div style="width: 50%; height: 100%; background-color: aliceblue; margin-left: 25%;">
+      <div class="navBarOfTable ">
+        <div class="headerWithCsvName">
 
-</div>
-  
-  <div class="modal-dialog modal-xl d-flex justify-content-center" style="width: 100%;">
+          <h4>&nbsp;&nbsp;CSV/Excelで機器情報アップロード機能</h4>
+          <h4 id='csvName'></h4>
+        </div>
+        <hr>
 
-    <div class="modal-content  d-flex justify-content-center flex-fill" style="width: auto;  margin-top: 10%;">
-      <!-- START -->
-      <div class="center"> 
-        
-        <label class="form-label" for="customFile">Import a CSV file</label>
-        <input type="file" class="form-control" id="csvFileInput" onchange="fileSelect(event)"/>
-  
-      <div class=" csv-export-btn-div">
-        <p class="font-weight-light">
+      </div>
+
+      <div class="modal-dialog modal-xl d-flex justify-content-center" style="width: 100%;">
+
+        <div class="modal-content  d-flex justify-content-center flex-fill" style="width: auto;  margin-top: 10%;">
+          <!-- START -->
+          <div class="center">
+            <div id="ImportFileField">
+              <label class="form-label" for="customFile">Import a CSV/Xlsx file</label>
+              <input type="file" class="form-control" id="csvFileInput" onchange="fileSelect(event)" />
+            </div>
+            <div id="ImportAnotherFileField">
+              <label class="form-label" for="customFile">Import a New File</label>
+              <button id="ImportAnotherFileButton" class="btn btn-primary">New File</button>
+            </div>
+            <div class=" csv-export-btn-div">
+              <!-- 
+                <p class="font-weight-light">
           
           * Double click in the data field to edit data
-        </p>
-  
-        <button
-          type="button"
-          name="convert"
-          id="csv-export-btn"
-          class="btn btn-primary"
-          this.disabled="true;"
-        >
-          Download
-        </button>
-        
-  
-        <div id="tableContainer" >
-          <table
-            id="csvRoot"
-            class="tableCSV table table-striped table-bordered"
-            
-          ></table>
-  
-          <button id="insert" class="btn btn-primary" style="margin-top: 10px">
-            Insert new row
-          </button>
-          <input type="number" id="insertNo" placeholder="Total no. of insertion"></input>
+        </p> -->
+
+              <div class="card" style="margin: 5px;">
+                <div class="card-body">
+                  Total Number of Track ID: <span id="TotalNumberOfTrackID"></span>
+                </div>
+                <div class="card-body">
+                  Total Number of Empty Track ID(First Column): <span id="TotalNumberOfEmptyTrackID"></span>
+                </div>
+              </div>
+
+              <button type="button" name="convert" id="csv-export-btn" class="btn btn-primary" this.disabled="true;">
+                Download
+              </button>
+
+
+              <div id="tableContainer">
+                <table id="csvRoot" class="tableCSV table table-striped table-bordered"></table>
+
+                <button id="insert" class="btn btn-primary" style="margin-top: 10px">
+                  Insert new row
+                </button>
+                <input type="number" id="insertNo" placeholder="Total no. of insertion"></input>
+              </div>
+            </div>
+
+            <table id="dummy" class="tableCSV table table-striped table-bordered">
+              <tbody></tbody>
+            </table>
+          </div>
+          <!-- END -->
         </div>
       </div>
-  
-      <table id="dummy" class="tableCSV table table-striped table-bordered">
-        <tbody></tbody>
-      </table>
-    </div>
-      <!-- END -->
     </div>
   </div>
-</div>
-</div>
 
 
 
@@ -104,7 +112,7 @@
 
 
 
-<!-- 
+  <!-- 
     <div class="center">
       <label class="form-label" for="customFile">Import a CSV file</label>
       <input type="file" class="form-control" id="csvFileInput" />
@@ -144,34 +152,33 @@
       <tbody></tbody>
     </table> -->
 
-    <!-- Here are the CDNs needed -->
-    
-    <script src="./libs/jquery-3.6.0.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
+  <!-- Here are the CDNs needed -->
 
-    <script src="./libs/bootstrap.min.js"></script>
-    <script src="./libs/jquery.dataTables.min.js"></script>
-    <script src="./libs/dataTables.bootstrap4.min.js"></script>
+  <script src="./libs/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
 
-    <script src="./libs/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
-    <!-- <script src="./libs/xlsx.full.min.js"></script> -->
+  <script src="./libs/bootstrap.min.js"></script>
+  <script src="./libs/jquery.dataTables.min.js"></script>
+  <script src="./libs/dataTables.bootstrap4.min.js"></script>
 
-    <script src="./libs/tableexport.min.js"></script>
-    <script src="./libs/papaparse.min.js"></script>
- 
-    <!-- Here are the custom JS file  -->
+  <script src="./libs/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+  <!-- <script src="./libs/xlsx.full.min.js"></script> -->
 
-    <script src="./js/excellToTable.js"></script>
-    <script type="module" src="./js/CSVDataInsertToTable.js"></script>
-    <script src="./js/downloadCSVFromTable.js"></script>
-    <script src="./js/dataEdit.js"></script>
-    <script src="./js/rowDelete.js"></script>
-    <script src="./js/rowInsert.js"></script>
-  </body>
+  <script src="./libs/tableexport.min.js"></script>
+  <script src="./libs/papaparse.min.js"></script>
+
+  <!-- Here are the custom JS file  -->
+
+  <script src="./js/excellToTable.js"></script>
+  <script type="module" src="./js/CSVDataInsertToTable.js"></script>
+  <script src="./js/downloadCSVFromTable.js"></script>
+  <script src="./js/dataEdit.js"></script>
+  <script src="./js/rowDelete.js"></script>
+  <script src="./js/rowInsert.js"></script>
+</body>
+
 </html>
