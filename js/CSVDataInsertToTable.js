@@ -37,10 +37,7 @@ class TableCsv {
               <thead>
                   <tr>
                       ${headerColumns
-                        .map(
-                          (text) =>
-                            `<th>${text}</th>`
-                        )
+                        .map((text) => `<th>${text}</th>`)
                         .join("")}
                         <th>Action</th>
                   </tr>
@@ -56,16 +53,15 @@ class TableCsv {
    */
   setBody(data) {
     const rowsHtml = data.map((row) => {
-      
       return `
               <tr>
                   ${row
-                      .map(
-                        (text) => `
+                    .map(
+                      (text) => `
                               <td class="table-data" contenteditable="false" >${text}</td>                                    
                               `
-                        )
-                        .join("")}
+                    )
+                    .join("")}
                         <td >
                           <div class="actionOptions">
                             
@@ -97,59 +93,80 @@ class TableCsv {
 const tableRoot = document.querySelector("#csvRoot");
 const csvFileInput = document.querySelector("#csvFileInput");
 const tableCsv = new TableCsv(tableRoot);
-
+var flag = 0;
 csvFileInput.addEventListener("change", (e) => {
-  $("#csvRoot").html('');
-  $(".dataTables_scrollHead").html('');
-  
+  localStorage.setItem("UploadNewFile", "1");
 
+  if (localStorage.getItem("UploadNewFile") === "1") {
+    $("#ImportFileField").hide();
+    $("#ImportAnotherFileField").show();
+  }
+
+  $("#csvRoot").html("");
+  $("#csvRoot thead").html("");
+  // $(".dataTables_scrollHead").html('');
+  // $('#csvRoot').destroy();
+  // $('#csvRoot').empty();
+
+  //  if(flag>0){
+  //   $('#csvRoot').destroy();
+  //   $('#csvRoot').empty();
+  //  }else{
+  //    flag++;
+  //  }
+  //  console.log(flag);
 
   // For excel
   // get the file name, possibly with path (depends on browser)
-        var filename = $("#csvFileInput").val();
+  var filename = $("#csvFileInput").val();
 
-        // Use a regular expression to trim everything before final dot
-        var extension = filename.replace(/^.*\./, '');
-        console.log(extension);
-        if (extension == filename) {
-          extension = '';
-      } else {
-          // if there is an extension, we convert to lower case
-          // (N.B. this conversion will not effect the value of the extension
-          // on the file upload.)
-          extension = extension.toLowerCase();
-      }
+  // Use a regular expression to trim everything before final dot
+  var extension = filename.replace(/^.*\./, "");
+  console.log(extension);
+  if (extension == filename) {
+    extension = "";
+  } else {
+    // if there is an extension, we convert to lower case
+    // (N.B. this conversion will not effect the value of the extension
+    // on the file upload.)
+    extension = extension.toLowerCase();
+  }
 
-      if(extension === 'csv') {
-        
-          Papa.parse(csvFileInput.files[0], {
-            delimiter: ",",
-            skipEmptyLines: true,
-            complete: (results) => {
-              console.log(results.data);
-              tableCsv.update(results.data.slice(1), results.data[0]);
-              $(document).ready(function () {
-                  $("#csvRoot").DataTable().destroy();
-                  $("#csvRoot").DataTable({
-                    destroy: true,
-                    scrollY: 400,
-                    scrollX: true,
-                    scrollCollapse: true,
-                  });  
-               });
-            },
+  if (extension === "csv") {
+    Papa.parse(csvFileInput.files[0], {
+      delimiter: ",",
+      skipEmptyLines: true,
+      complete: (results) => {
+        console.log(results.data);
+        tableCsv.update(results.data.slice(1), results.data[0]);
+
+        $(document).ready(function () {
+          $("#csvRoot").DataTable({
+            destroy: true,
+            scrollY: 300,
+            scrollX: true,
+            scrollCollapse: true,
+            autoWidth: true,
+            responsive: true,
           });
-        }
-        else if(extension === 'xlsx' || extension === 'xls'){
-          ExportToTable();
-        }else{
-           alert("WRONG FILE");
-           $(".csv-export-btn-div").hide();
-        }
-        
+          let totalData = $("#csvRoot").DataTable().data().count();
+          let iColumns = $("#csvRoot thead th").length;
+          let totalRow = totalData / iColumns;
 
-  //for csv 
-  
+          $("#TotalNumberOfTrackID").text(totalRow);
+          $("#TotalNumberOfEmptyTrackID").text(totalRow);
+
+          let totalEmptyRows = $("#csvRoot tr td:first-child:empty").length;
+          $("#TotalNumberOfEmptyTrackID").text(totalEmptyRows);
+        });
+      },
+    });
+  } else if (extension === "xlsx" || extension === "xls") {
+    ExportToTable();
+  } else {
+    alert("WRONG FILE");
+    $(".csv-export-btn-div").hide();
+  }
+
+  //for csv
 });
-
-
