@@ -11,6 +11,11 @@ jQuery(document).ready(function () {
   });
 
   function ResultsToTable() {
+    // scrolling to the bottom for every new row entry starts
+    // var $scrollBody = $($("#csvRoot").DataTable().table().node()).parent();
+    // $scrollBody.scrollTop($scrollBody.get(0).scrollHeight);
+    // scrolling to the bottom for every new row entry ends
+
     var lastIndex = $("#csvRoot tr:nth-child(1) td:last").index(); // This will get the last column index num so that action column is not downloaded
 
     $("#csvRoot").tableExport({
@@ -47,15 +52,14 @@ $("#csvFileInput").on("input", function () {
   $(".csv-export-btn-div").show();
 });
 
-
 // var csvFilename = $('input[type=file]')[0].files.length ? ('input[type=file]')[0].files[0].name : "";
 // console.log(csvFilename);
 // if(csvFilename){
 //   $('.csvName').text(csvFilename);
 // }
 
-function fileSelect( e){
+function fileSelect(e) {
   console.log(e.target.files[0].name);
   let csvFilename = e.target.files[0].name;
-  $('#csvName').html('' + csvFilename + '&nbsp;&nbsp;');
+  $("#csvName").html("" + csvFilename + "&nbsp;&nbsp;");
 }
