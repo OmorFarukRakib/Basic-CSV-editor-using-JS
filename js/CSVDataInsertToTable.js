@@ -65,7 +65,7 @@ class TableCsv {
                         <td >
                           <div class="actionOptions">
                             
-                              <button class="editbtn btn btn-primary" >Edit</button>
+                              <button class="editbtn btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>
                             
                              
                               <button class="deleteRow btn btn-danger">Delete</button>
@@ -142,13 +142,18 @@ csvFileInput.addEventListener("change", (e) => {
 
         $(document).ready(function () {
           $("#csvRoot").DataTable({
+            searching: false,
+            ordering: false,
+            bPaginate: false,
             destroy: true,
             scrollY: 300,
             scrollX: true,
             scrollCollapse: true,
             autoWidth: true,
             responsive: true,
+            scroller: true,
           });
+
           let totalData = $("#csvRoot").DataTable().data().count();
           let iColumns = $("#csvRoot thead th").length;
           let totalRow = totalData / iColumns;
