@@ -71,11 +71,16 @@
 
               <div id="tableContainer">
                 <table id="csvRoot" class="tableCSV table table-striped table-bordered"></table>
-
-                <button id="insert" class="btn btn-primary" style="margin-top: 10px">
-                  Insert new row
+                <!-- MODEL INSERT -->
+                <button type="button" id="insert" class="btn btn-primary" data-toggle="modal"
+                  data-target="#insertNewRow">
+                  INSERT A ROW
                 </button>
+                <!-- <button id="insert" class="btn btn-primary" style="margin-top: 10px">
+                  Insert new row
+                </button> 
                 <input type="number" id="insertNo" placeholder="Total no. of insertion"></input>
+                -->
               </div>
             </div>
 
@@ -90,69 +95,179 @@
   </div>
 
 
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertNewRow">
+    INSERT
+  </button> -->
+
+  <!-- INSERT Modal -->
+  <div class="modal fade" id="insertNewRow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">New Information Insertion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="index.php" id="InsertForm">
+            <table class="table table-hover">
+              <tr>
+                <td>Device ID </td>
+                <td> <input type="text" required name="deviceID" class="from-control" placeholder="Device ID"></td>
+              </tr>
+              <tr>
+                <td>Device Manufacturer </td>
+                <td> <input type="text" required name="deviceManufacturer" class="from-control"
+                    placeholder="Device Manufacturer">
+                </td>
+              </tr>
+              <tr>
+                <td>Device Serial </td>
+                <td> <input type="text" required name="deviceSerial" class="from-control" placeholder="Device Serial">
+                </td>
+              </tr>
+              <tr>
+                <td>Device Model </td>
+                <td> <input type="text" required name="deviceModel" class="from-control" placeholder="Device Model">
+                </td>
+
+              </tr>
 
 
 
+              <!-- <tr>
 
+                <td>Device Rating </td>
+                <td> <input type="text" name="deviceRating" class="from-control" placeholder="Enter device Rating"></td>
+              </tr> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- 
-    <div class="center">
-      <label class="form-label" for="customFile">Import a CSV file</label>
-      <input type="file" class="form-control" id="csvFileInput" />
-    </div>
-
-    <div class="center csv-export-btn-div">
-      <p class="font-weight-light">
-        * Double click in the data field to edit data
-      </p>
-
-      <button
-        type="button"
-        name="convert"
-        id="csv-export-btn"
-        class="btn btn-primary"
-        this.disabled="true;"
-      >
-        Download
-      </button>
-      
-
-      <div id="tableContainer" class="center container">
-        <table
-          id="csvRoot"
-          class="tableCSV table table-striped table-bordered"
-          
-        ></table>
-
-        <button id="insert" class="btn btn-primary" style="margin-top: 10px">
-          Insert new row
-        </button>
-        <input type="number" id="insertNo" placeholder="Total no. of insertion"></input>
+              <tr>
+                <td>Device Rating </td>
+                <td> <select name="deviceRating" id="deviceRating" required form="deviceForm">
+                    <option value="" disabled selected hidden>Give a Rating [0-5]</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Save Device Informations </td>
+                <td colspan="2" align="center"> <input type="submit" name="submitTable" class="btn btn-primary"
+                    value="Save"></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeInsertModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
       </div>
     </div>
+  </div>
 
-    <table id="dummy" class="tableCSV table table-striped table-bordered">
-      <tbody></tbody>
-    </table> -->
+
+  <!-- Modal ENDS -->
+
+
+
+
+  <!-- Modal for editing starts -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edit existing table data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body">
+            <form method="post" id="EditForm">
+              <table class="table table-hover">
+                <tr>
+                  <td>Device ID </td>
+                  <td>
+                    <!-- {* for storing ID *} -->
+                    <input type="hidden" name="IDEdit" class="from-control" id="ID_EDITID">
+                    <input type="text" required name="deviceIDEdit" class="from-control" id="deviceID_EDITID"
+                      placeholder="Device ID">
+                  </td>
+                  </td>
+
+
+                </tr>
+                <tr>
+                  <td>Device Manufacturer </td>
+                  <td> <input type="text" required name="deviceManufacturerEdit" class="from-control"
+                      id="deviceManufacturer_EDITID" placeholder="Device Manufacturer"></td>
+                </tr>
+                <tr>
+                  <td>Device Serial </td>
+                  <td> <input type="text" required name="deviceSerialEdit" class="from-control" id="deviceSerial_EDITID"
+                      placeholder="Device Serial"></td>
+                </tr>
+                <tr>
+                  <td>Device Model </td>
+                  <td> <input type="text" required name="deviceModelEdit" class="from-control" id="deviceModel_EDITID"
+                      placeholder="Device Model"></td>
+
+                </tr>
+                <tr>
+                  <td>Device Rating </td>
+                  <td> <select name="deviceRatingEdit" required form="deviceFormEdit" id="deviceRating_EDITID">
+                      <option value="" disabled selected hidden>Give a Rating [0-5]</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </td>
+                </tr>
+                <!-- {* <tr>
+                  <td>Save Device Informations </td>
+                  <td colspan="2" align="center"> <input type="submit" name="submitTable" class="btn btn-primary"
+                      value="Save"></td>
+                </tr> *} -->
+              </table>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="editModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" name="submitTableEdit" class="btn btn-primary" value="Update">
+          <!-- <button type="button" class="btn btn-primary">Save changes</button>  -->
+
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- MODEL FOR EDITING ENDS -->
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- Here are the CDNs needed -->
+
 
   <script src="./libs/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -163,11 +278,12 @@
   <script src="./libs/jquery.dataTables.min.js"></script>
   <script src="./libs/dataTables.bootstrap4.min.js"></script>
 
+
   <script src="./libs/FileSaver.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
   <!-- <script src="./libs/xlsx.full.min.js"></script> -->
-
+  <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
   <script src="./libs/tableexport.min.js"></script>
   <script src="./libs/papaparse.min.js"></script>
 
@@ -176,9 +292,10 @@
   <script src="./js/excellToTable.js"></script>
   <script type="module" src="./js/CSVDataInsertToTable.js"></script>
   <script src="./js/downloadCSVFromTable.js"></script>
-  <script src="./js/dataEdit.js"></script>
+  <!-- <script src="./js/dataEdit.js"></script> -->
+  <script src="./js/ModalInsert_Edit.js"></script>
   <script src="./js/rowDelete.js"></script>
-  <script src="./js/rowInsert.js"></script>
+  <!-- <script src="./js/rowInsert.js"></script> -->
 </body>
 
 </html>
