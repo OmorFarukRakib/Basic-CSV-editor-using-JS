@@ -41,10 +41,13 @@ function ExportToTable() {
         //DATATABLE
         $(document).ready(function () {
           $("#csvRoot").DataTable({
+            searching: false,
+            ordering: false,
+            bPaginate: false,
             destroy: true,
             scrollY: 300,
             scrollX: true,
-            order: [1, "asc"],
+            //order: [1, "asc"],
             scrollCollapse: true,
           });
           let totalData = $("#csvRoot").DataTable().data().count();
@@ -91,10 +94,10 @@ function BindTable(jsondata, tableid) {
     }
     row$.append(` <td> <div class="actionOptions">
                         
-                        <button class="editbtn btn btn-primary" >Edit</button>
-                      
-                       
-                        <button class="deleteRow btn btn-danger">Delete</button>
+                        <button class="editbtn btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>
+                            
+                             
+                              <button class="deleteRow btn btn-danger">Delete</button>
                      
                     </div> </td> </tr>`);
     finalrow$.append(row$);
