@@ -13,15 +13,16 @@ $("#csvRoot").on("click", ".deleteRow", function () {
     $("#csvRoot").DataTable().row($(this).parents("tr")).remove().draw();
 
     // Needs to create new instance of datatable as table has been updated
-    $("#csvRoot").DataTable().destroy();
-    $("#csvRoot").DataTable({
-      destroy: true,
-      scrollY: 300,
-      scrollX: true,
-      scrollCollapse: true,
-      autoWidth: true,
-      responsive: true,
-    });
+    // $("#csvRoot").DataTable().destroy();
+    // $("#csvRoot").DataTable({
+    //   bPaginate: false,
+    //   destroy: true,
+    //   scrollY: 300,
+    //   scrollX: true,
+    //   scrollCollapse: true,
+    //   autoWidth: true,
+    //   responsive: true,
+    // });
 
     // Needs to re calculate the rows number and empty rows number Starts
     let totalData = $("#csvRoot").DataTable().data().count();
