@@ -112,26 +112,29 @@
           </button>
         </div>
         <div class="modal-body">
-          <form method="post" action="index.php" id="InsertForm">
+          <form method="post" id="InsertForm">
             <table class="table table-hover">
               <tr>
-                <td>Device ID </td>
-                <td> <input type="text" required name="deviceID" class="from-control" placeholder="Device ID"></td>
+                <td>TrackID </td>
+                <td> <input type="text" name="TrackID" style="font-weight: bold;" class="from-control"
+                    placeholder="TrackID"></td>
               </tr>
               <tr>
-                <td>Device Manufacturer </td>
-                <td> <input type="text" required name="deviceManufacturer" class="from-control"
-                    placeholder="Device Manufacturer">
+                <td>Device ID </td>
+                <td> <input type="text" name="DeviceID" style="font-weight: bold;" class="from-control"
+                    placeholder="Device ID">
                 </td>
               </tr>
               <tr>
-                <td>Device Serial </td>
-                <td> <input type="text" required name="deviceSerial" class="from-control" placeholder="Device Serial">
+                <td>Device Vendor </td>
+                <td> <input type="text" name="DeviceVendor" style="font-weight: bold;" class="from-control"
+                    placeholder="Device Vendor">
                 </td>
               </tr>
               <tr>
                 <td>Device Model </td>
-                <td> <input type="text" required name="deviceModel" class="from-control" placeholder="Device Model">
+                <td> <input type="text" name="DeviceModel" style="font-weight: bold;" class="from-control"
+                    placeholder="Device Model">
                 </td>
 
               </tr>
@@ -145,22 +148,25 @@
               </tr> -->
 
               <tr>
-                <td>Device Rating </td>
-                <td> <select name="deviceRating" id="deviceRating" required form="deviceForm">
-                    <option value="" disabled selected hidden>Give a Rating [0-5]</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
+                <td>Device Serial </td>
+                <td> <input type="text" name="DeviceSerial" style="font-weight: bold;" class="from-control"
+                    placeholder="Device Serial">
                 </td>
               </tr>
+
               <tr>
-                <td>Save Device Informations </td>
+                <td>Memo </td>
+                <td> <input type="text" name="Memo" style="font-weight: bold;" class="from-control" placeholder="Memo">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Save Tracking Informations </td>
                 <td colspan="2" align="center"> <input type="submit" name="submitTable" class="btn btn-primary"
                     value="Save"></td>
               </tr>
+
+
             </table>
           </form>
         </div>
@@ -194,43 +200,38 @@
             <form method="post" id="EditForm">
               <table class="table table-hover">
                 <tr>
-                  <td>Device ID </td>
+                  <td>TrackID </td>
                   <td>
-                    <!-- {* for storing ID *} -->
-                    <input type="hidden" name="IDEdit" class="from-control" id="ID_EDITID">
-                    <input type="text" required name="deviceIDEdit" class="from-control" id="deviceID_EDITID"
-                      placeholder="Device ID">
+                    <input type="text" name="TrackIDEdit" style="font-weight: bold;" class="from-control"
+                      id="TrackIDEdit" placeholder="TrackID">
                   </td>
-                  </td>
-
-
                 </tr>
                 <tr>
-                  <td>Device Manufacturer </td>
-                  <td> <input type="text" required name="deviceManufacturerEdit" class="from-control"
-                      id="deviceManufacturer_EDITID" placeholder="Device Manufacturer"></td>
+                  <td>Device ID </td>
+                  <td> <input type="text" name="DeviceIDEdit" style="font-weight: bold;" class="from-control"
+                      id="DeviceIDEdit" placeholder="Device ID"></td>
                 </tr>
                 <tr>
-                  <td>Device Serial </td>
-                  <td> <input type="text" required name="deviceSerialEdit" class="from-control" id="deviceSerial_EDITID"
-                      placeholder="Device Serial"></td>
+                  <td>Device Vendor </td>
+                  <td> <input type="text" name="DeviceVendorEdit" style="font-weight: bold;" class="from-control"
+                      id="DeviceVendorEdit" placeholder="Device Vendor"></td>
                 </tr>
                 <tr>
                   <td>Device Model </td>
-                  <td> <input type="text" required name="deviceModelEdit" class="from-control" id="deviceModel_EDITID"
-                      placeholder="Device Model"></td>
+                  <td> <input type="text" name="deviceModelEdit" style="font-weight: bold;" class="from-control"
+                      id="deviceModelEdit" placeholder="Device Model"></td>
 
                 </tr>
                 <tr>
-                  <td>Device Rating </td>
-                  <td> <select name="deviceRatingEdit" required form="deviceFormEdit" id="deviceRating_EDITID">
-                      <option value="" disabled selected hidden>Give a Rating [0-5]</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+                  <td>Device Serial </td>
+                  <td> <input type="text" name="DeviceSerialEdit" style="font-weight: bold;" class="from-control"
+                      id="DeviceSerialEdit" placeholder="Device Serial">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Memo </td>
+                  <td> <input type="text" name="MemoEdit" style="font-weight: bold;" class="from-control" id="MemoEdit"
+                      placeholder="Memo">
                   </td>
                 </tr>
                 <!-- {* <tr>
