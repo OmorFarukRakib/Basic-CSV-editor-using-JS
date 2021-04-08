@@ -149,7 +149,7 @@ csvFileInput.addEventListener("change", (e) => {
             scrollY: 300,
             scrollX: true,
             scrollCollapse: true,
-            autoWidth: true,
+            autoWidth: false,
             responsive: true,
             scroller: true,
           });
