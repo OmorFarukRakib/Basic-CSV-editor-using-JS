@@ -15,12 +15,12 @@ $(document).ready(function () {
 
     console.log(data);
 
-    $("#TrackIDEdit").val(data[0]);
-    $("#DeviceIDEdit").val(data[1]);
-    $("#DeviceVendorEdit").val(data[2]);
-    $("#deviceModelEdit").val(data[3]);
-    $("#DeviceSerialEdit").val(data[4]);
-    $("#MemoEdit").val(data[5]);
+    $("#TrackIDEdit").val(data[1]);
+    $("#DeviceIDEdit").val(data[2]);
+    $("#DeviceVendorEdit").val(data[3]);
+    $("#deviceModelEdit").val(data[4]);
+    $("#DeviceSerialEdit").val(data[5]);
+    $("#MemoEdit").val(data[6]);
 
     /// replace with existing row when submitted
     $("#EditForm").submit(function (event) {
@@ -40,21 +40,21 @@ $(document).ready(function () {
 
       var temp = $("#csvRoot").DataTable().row(row_index).data();
       console.log("ata data before edit-> " + temp + " -> ");
-      temp[0] = TrackIDEdit;
-      temp[1] = DeviceIDEdit;
-      temp[2] = DeviceVendorEdit;
-      temp[3] = deviceModelEdit;
-      temp[4] = DeviceSerialEdit;
-      temp[5] = MemoEdit;
+      temp[1] = TrackIDEdit;
+      temp[2] = DeviceIDEdit;
+      temp[3] = DeviceVendorEdit;
+      temp[4] = deviceModelEdit;
+      temp[5] = DeviceSerialEdit;
+      temp[6] = MemoEdit;
       console.log("ata data after edit-> " + temp + " -> ");
       var tableRow = row_index; // GET TABLE ROW NUMBER
       // Updating existed row data with new data and row number
-      $("#csvRoot").dataTable().fnUpdate(temp[0], [tableRow], 0, true);
       $("#csvRoot").dataTable().fnUpdate(temp[1], [tableRow], 1, true);
       $("#csvRoot").dataTable().fnUpdate(temp[2], [tableRow], 2, true);
       $("#csvRoot").dataTable().fnUpdate(temp[3], [tableRow], 3, true);
       $("#csvRoot").dataTable().fnUpdate(temp[4], [tableRow], 4, true);
       $("#csvRoot").dataTable().fnUpdate(temp[5], [tableRow], 5, true);
+      $("#csvRoot").dataTable().fnUpdate(temp[6], [tableRow], 6, true);
 
       $("#editModalClose").click();
 
@@ -64,6 +64,8 @@ $(document).ready(function () {
       $("input[name=deviceModelEdit]").val("");
       $("input[name=DeviceSerialEdit]").val("");
       $("input[name=MemoEdit]").val("");
+      let totalEmptyRows = $("#csvRoot tr td:nth-child(2):empty").length;
+      $("#TotalNumberOfEmptyTrackID").text(totalEmptyRows);
     });
   });
 });
@@ -84,7 +86,9 @@ $(document).ready(function () {
     let DeviceSerial = $("input[name=DeviceSerial]").val();
     let Memo = $("input[name=Memo]").val();
 
-    var NewROW = `<td class="table-data sorting_1" contenteditable="false">${TrackID}</td>                                    
+    var NewROW = `<td class="table-data sorting_1" contenteditable="false"></td>  
+    
+                              <td class="table-data" contenteditable="false">${TrackID}</td> 
                               
                               <td class="table-data" contenteditable="false">${DeviceID}</td>                                    
                               
@@ -117,7 +121,7 @@ $(document).ready(function () {
     $("input[name=TrackID]").val("");
     $("input[name=DeviceID]").val("");
     $("input[name=DeviceVendor]").val("");
-    $("input[name=deviceModel]").val("");
+    $("input[name=DeviceModel]").val("");
     $("input[name=DeviceSerial]").val("");
     $("input[name=Memo]").val("");
 
@@ -134,8 +138,13 @@ $(document).ready(function () {
     $("#TotalNumberOfTrackID").text(totalRow);
     $("#TotalNumberOfEmptyTrackID").text(totalRow);
 
-    let totalEmptyRows = $("#csvRoot tr td:first-child:empty").length;
+    let totalEmptyRows = $("#csvRoot tr td:nth-child(2):empty").length;
     $("#TotalNumberOfEmptyTrackID").text(totalEmptyRows);
+
+    // Add serial No
+    $("#csvRoot tr").each(function (index) {
+      $(this).find("td:nth-child(1)").html(index);
+    });
     // Needs to re calculate the rows number and empty rows number Ends
   });
 });
@@ -153,3 +162,15 @@ $(document).ready(function () {
     localStorage.setItem("UploadNewFile", "0");
   }
 });
+
+// Add serial No
+// $(document).ready(function () {
+//   //var addSerialNumber = function () {
+//   $("#csvRoot tr").each(function (index) {
+//     $(this)
+//       .find("td:nth-child(1)")
+//       .html(index + 1);
+//   });
+//   // };
+//   //addSerialNumber();
+// });
