@@ -32,10 +32,24 @@ $("#csvRoot").on("click", ".deleteRow", function () {
     $("#TotalNumberOfTrackID").text(totalRow);
     $("#TotalNumberOfEmptyTrackID").text(totalRow);
 
-    let totalEmptyRows = $("#csvRoot tr td:first-child:empty").length;
+    let totalEmptyRows = $("#csvRoot tr td:nth-child(2):empty").length;
     $("#TotalNumberOfEmptyTrackID").text(totalEmptyRows);
+    // Add serial No
+    $("#csvRoot tr").each(function (index) {
+      $(this).find("td:nth-child(1)").html(index);
+    });
     // Needs to re calculate the rows number and empty rows number Ends
   } else {
     return false;
   }
+
+  //Serial no Modify
+  // var addSerialNumber = function () {
+  //   $("#csvRoot tr").each(function (index) {
+  //     $(this)
+  //       .find("td:nth-child(1)")
+  //       .html(index + 1);
+  //   });
+  // };
+  // addSerialNumber();
 });
