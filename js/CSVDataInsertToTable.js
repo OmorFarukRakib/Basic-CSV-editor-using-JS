@@ -35,7 +35,9 @@ class TableCsv {
       "afterbegin",
       `
               <thead>
+              
                   <tr>
+                  <th>Serial No(#)</th>
                       ${headerColumns
                         .map((text) => `<th>${text}</th>`)
                         .join("")}
@@ -52,9 +54,11 @@ class TableCsv {
    * @param {string[][]} data A 2D array of data to be used as the table body
    */
   setBody(data) {
+    var serialNoCount = 1;
     const rowsHtml = data.map((row) => {
       return `
               <tr>
+                  <td class="table-data" contenteditable="false" ></td>
                   ${row
                     .map(
                       (text) => `
@@ -161,8 +165,12 @@ csvFileInput.addEventListener("change", (e) => {
           $("#TotalNumberOfTrackID").text(totalRow);
           $("#TotalNumberOfEmptyTrackID").text(totalRow);
 
-          let totalEmptyRows = $("#csvRoot tr td:first-child:empty").length;
+          let totalEmptyRows = $("#csvRoot tr td:nth-child(2):empty").length;
           $("#TotalNumberOfEmptyTrackID").text(totalEmptyRows);
+          // Add serial No
+          $("#csvRoot tr").each(function (index) {
+            $(this).find("td:nth-child(1)").html(index);
+          });
         });
       },
     });
